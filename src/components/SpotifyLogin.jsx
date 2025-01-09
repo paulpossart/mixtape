@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken, clearToken } from "../redux/tokenSlice";
 import { authorise, getTokenAndProfile } from "../api/apiCalls";
@@ -7,9 +7,12 @@ import { setuserId, clearUserId } from "../redux/userIdSlice";
 import { setErrorMessage, clearErrorMessage } from "../redux/authErrorSlice";
 import { setExpirationTime, clearExpirationTime } from "../redux/tokenExpirationTimeSlice";
 
+import styles from '../styles/buttons.module.scss';
+
 function SpotifyLogin() {
     const userId = useSelector((state) => state.userId);
-    const errorMessage = useSelector((state) => state.authErrorMessage)
+    const errorMessage = useSelector((state) => state.authErrorMessage);
+    const token = useSelector((state) => state.token)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,7 +35,7 @@ function SpotifyLogin() {
 
             fetchUserData();
         }
-    }, [userId])
+    }, [userId, window.location.href])
 
     const handleLogin = () => {
         authorise();
@@ -49,15 +52,18 @@ function SpotifyLogin() {
         localStorage.removeItem('token_expiration_time');
         localStorage.removeItem('spotify_auth_state');
 
-        window.location.href = '/';
+        window.location = '/';
     }
 
     return (
         <div>
-            <p>Welcome, {userId || 'Guest'}</p>
-            <p>{errorMessage}</p>
-            <button onClick={handleLogout}>Logout</button>
-            <button onClick={handleLogin}>Login with Spotify</button>
+            {!token ? (
+                <button className={styles.button1} onClick={handleLogin}>Spotify Login</button>
+            ) : (
+                <button className={styles.button1} onClick={handleLogout}>Log Out</button>
+            )}
+
+            
         </div>
     );
 }

@@ -39,7 +39,7 @@ export async function getTokenAndProfile() {
     const storedState = localStorage.getItem(stateKey);
     const expirationTime = new Date().getTime() + expiresIn * 1000;
 
-    window.location.hash = '';
+    window.location.hash = 'happy_listening!';
 
     if (!token || !expiresIn) {
         const savedToken = localStorage.getItem('access_token');

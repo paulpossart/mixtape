@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from "react";
-//import { getUser } from "../api/apiCalls";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Searchbar({ className }) {
-    const [userId, setUserID] = useState('');
-    const [accessToken, setAccessToken] = useState(localStorage.getItem('access_token'))
-    //const token = useSelector((state) => state.token) 
+   
+    const userId = useSelector((state) => state.userId);
+    const errorMessage = useSelector((state) => state.authErrorMessage);
+    const expirationTime = useSelector((state) => state.tokenExpirationTime) 
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            if (accessToken) {
-                await getUser(accessToken, setUserID)
-            }
-        }
-        if (accessToken) {fetchUser();}
-    }, [accessToken])
+    const sessionExpiry = expirationTime
+    ? new Date(parseInt(expirationTime)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+    : 'Loading...';
+
 
     return (
         <div className={className}>
-            <p >searchbar </p>
-            {userId ? (<p>{userId}</p>) : (<p>nope</p>)}
+            <p>Welcome, {userId || 'Guest'}</p>
+            <p>{errorMessage || sessionExpiry}</p>
         </div>
     );
 }
