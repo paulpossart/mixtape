@@ -1,0 +1,54 @@
+@use '../styles/colors' as c;
+@use '../styles/fonts' as f;
+
+.button1 {
+    font: {
+        family: f.$source;
+        size: 1.6rem;
+        weight: 600;
+    }
+
+    color: black;
+    border: none;
+    border-radius: 25px;
+    background-color: c.$spotifyGreen;
+    padding: 0.5em 1em;
+    margin: 1em 0.5em 1em 0.5em;
+
+    transition: transform 0.2s ease,
+    color 0.5s,
+    background-color 0.5s;
+
+    @media (hover: hover) {
+        &:hover {
+            cursor: pointer;
+            color: #1DB954;
+            background-color: black;
+        }
+    }
+
+    &:active {
+        transform: scale(0.9);
+        color: c.$spotifyGreen;
+        background-color: black;
+    }
+
+}
+
+.button2 {
+    @extend .button1;
+    color: white;
+    background-color: c.$btnGrey;
+
+    @media (hover: hover) {
+        &:hover {
+            color: c.$btnGrey;
+            background-color: white;
+        }
+    }
+
+    &:active {
+        color: c.$btnGrey;
+        background-color: white;
+    }
+}
