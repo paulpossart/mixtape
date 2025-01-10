@@ -2,8 +2,6 @@ const clientId = 'e9dcfcba91d74f3aa912153e71f0cd1d';
 const redirectUri = 'http://localhost:5173/';
 const stateKey = 'spotify_auth_state';
 
-//===================================
-
 export async function authorise() {
 
     const generateRandomString = (length) => {
@@ -27,8 +25,6 @@ export async function authorise() {
     window.location.href = url;
 }
 
-//===================================
-
 export async function getTokenAndProfile() {
 
     const hash = window.location.hash.slice(1);
@@ -39,8 +35,6 @@ export async function getTokenAndProfile() {
     const storedState = localStorage.getItem(stateKey);
     const expirationTime = new Date().getTime() + expiresIn * 1000;
 
-    window.location.hash = 'happy_listening!';
-
     if (!token || !expiresIn) {
         const savedToken = localStorage.getItem('access_token');
         const savedExpirationTime = localStorage.getItem('token_expiration_time');
@@ -49,6 +43,7 @@ export async function getTokenAndProfile() {
             const currentTime = new Date().getTime();
 
             if (currentTime < savedExpirationTime) {
+                window.location.hash = '';
                 return getProfile(savedToken, savedExpirationTime);
             } else {
                 localStorage.removeItem('access_token');
@@ -67,6 +62,7 @@ export async function getTokenAndProfile() {
 
     localStorage.setItem('access_token', token);
     localStorage.setItem('token_expiration_time', expirationTime);
+    window.location.hash = '';
     return getProfile(token, expirationTime);
 }
 

@@ -1,0 +1,29 @@
+@use '../styles/colors' as c;
+@use '../styles/fonts' as f;
+
+.div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-top: 0.4em;
+    
+    line-height: 2;
+    font-family: f.$merriweather;
+
+    .userName {
+        color: c.$spotifyGreen;
+    }
+
+    .search {
+        margin-top: 1.4em;
+    }
+
+    .radio {
+        accent-color: c.$mixtapeYellow;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
