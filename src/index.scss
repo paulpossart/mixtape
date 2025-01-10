@@ -13,7 +13,7 @@ body {
   color: white;
   background-color: black;
 
-  @media (min-width: 800px),
+  @media (min-width: 1500px),
   (orientation: portrait) and (min-width: 390px) {
     font-size: 2rem;
   }
