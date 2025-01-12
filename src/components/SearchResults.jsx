@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { pushToPlaylist } from "../redux/playlistSlice";
 import styles from './SearchResults.module.scss';
-import buttons from '../styles/buttons.module.scss'
+import buttons from '../styles/buttons.module.scss';
 
 function SearchResults({ className }) {
     const trackList = useSelector((state) => state.trackList);
     const playlist = useSelector((state) => state.playlist);
     const searchSubmitted = useSelector((state) => state.searchSubmitted);
-    const dispatch = useDispatch();  
+    const dispatch = useDispatch();
 
     const handleAddSong = (track) => {
-        console.log('Dispatching with:', track);
+        if (!playlist.find(item => item.id === track.id ))
         dispatch(pushToPlaylist(track));
-        console.log('state: ' , playlist)
     }
 
     return (
@@ -25,14 +24,14 @@ function SearchResults({ className }) {
                         trackList.map(track => (
                             <div className={styles.tracks} key={track.id}>
                                 <img src={track.image_url} />
-                                <div className={styles.card}>
+                                <div>
                                     <iframe className={styles.iframe}
                                         src={`https://open.spotify.com/embed/track/${track.id}`}
                                         allowtransparency="true"
                                         allow="encrypted-media"
                                     />
                                 </div>
-                                <div className={styles.addSong}>
+                                <div className={styles.addOrRemoveTrack}>
                                     <p>Add <i>{track.name}</i> to playlist?</p>
                                     <button className={buttons.button2} onClick={() => handleAddSong(track)}>Add</button>
                                 </div>
