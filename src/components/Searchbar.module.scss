@@ -5,18 +5,15 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     padding-top: 0.4em;
-    
     line-height: 2;
-    font-family: f.$merriweather;
 
     .userName {
         color: c.$spotifyGreen;
     }
 
     .search {
-        margin-top: 1.4em;
+        margin-top: 1.4rem;
     }
 
     .radio {

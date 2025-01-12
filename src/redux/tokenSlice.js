@@ -7,7 +7,7 @@ const tokenSlice = createSlice({
         setToken: (state, action) => {
             return action.payload
         },
-        clearToken: (state, action) => {
+        clearToken: () => {
             return null;
         }
     }

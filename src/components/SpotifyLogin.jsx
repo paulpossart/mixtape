@@ -15,9 +15,7 @@ function SpotifyLogin() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-        console.log(userId || 'nowt');
-
+        
         if (!userId) {
             const fetchUserData = async () => {
                 const result = await getTokenAndProfile();
