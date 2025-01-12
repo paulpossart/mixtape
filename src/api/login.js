@@ -52,7 +52,7 @@ export async function getTokenAndProfile() {
             }
         }
 
-        return { error: 'Please Login.' }
+        return { error: 'Please login.' }
 
     }
 

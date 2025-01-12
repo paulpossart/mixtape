@@ -7,7 +7,7 @@ const tokenExpirationTimeSlice = createSlice({
         setExpirationTime: (state, action) => {
             return action.payload
         },
-        clearExpirationTime: (state, action) => {
+        clearExpirationTime: () => {
             return null;        }
     }
 });

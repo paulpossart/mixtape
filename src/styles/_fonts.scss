@@ -2,3 +2,14 @@
 
 $merriweather: 'Merriweather Sans', sans-serif;
 $source: 'Source Sans 3', serif;
+
+@mixin subtitle {
+    font: {
+        family: $source;
+        weight: 700;
+        size: 2.4rem;
+    }
+    line-height: 2.5;
+
+}
+

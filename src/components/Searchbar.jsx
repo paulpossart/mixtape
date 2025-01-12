@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchType } from "../redux/searchTypeSlice";
-import { setTrackList } from "../redux/trackListSlice";
+import { clearTrackList, setTrackList } from "../redux/trackListSlice";
 import { fetchSongs } from "../api/fetchSongs";
+import { setSearchSubmitted } from "../redux/searchSubmittedSlice";
 import styles from './Searchbar.module.scss';
 import buttons from '../styles/buttons.module.scss';
 
@@ -37,6 +38,8 @@ function Searchbar({ className }) {
         setUserInput('');
         setSearchErrorMessage('');
         setLoginMessage(null);
+        dispatch(setSearchSubmitted(false));
+        dispatch(clearTrackList());
 
         if (!userId) {
             setLoginMessage(<p>Please login!</p>);
@@ -52,7 +55,9 @@ function Searchbar({ className }) {
         if (error) {
             setSearchErrorMessage(<p>{error}</p>);
         } else if (success) {
-            dispatch(setTrackList(success))
+            dispatch(setTrackList(success));
+            dispatch(setSearchSubmitted(true));
+
         }
     }
 

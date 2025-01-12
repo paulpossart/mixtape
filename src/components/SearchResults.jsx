@@ -1,20 +1,48 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { pushToPlaylist } from "../redux/playlistSlice";
+import styles from './SearchResults.module.scss';
+import buttons from '../styles/buttons.module.scss'
 
 function SearchResults({ className }) {
-    const trackList = useSelector((state) => state.trackList)
-    return <div className={className}>
-        <h3>search results</h3>
-        {trackList.length === 0 ? <p>No results</p>
-            : (trackList.map(track => (
-                <div key={track.id}>
-                    <h4>{track.name}</h4>
-                    <p>{track.artist} | <i>{track.album}</i></p>
-                    <img src={track.image_url} />
-                </div>
-            )))}
+    const trackList = useSelector((state) => state.trackList);
+    const playlist = useSelector((state) => state.playlist);
+    const searchSubmitted = useSelector((state) => state.searchSubmitted);
+    const dispatch = useDispatch();  
 
-    </div>
+    const handleAddSong = (track) => {
+        console.log('Dispatching with:', track);
+        dispatch(pushToPlaylist(track));
+        console.log('state: ' , playlist)
+    }
+
+    return (
+        <div className={`${className} ${styles.div}`}>
+            <h2>Search Results</h2>
+            <div className={styles.container}>
+                <div className={styles.results}>
+                    {searchSubmitted && trackList.length === 0 ? <div className={styles.noResults}><p>No results</p></div> : (
+                        trackList.map(track => (
+                            <div className={styles.tracks} key={track.id}>
+                                <img src={track.image_url} />
+                                <div className={styles.card}>
+                                    <iframe className={styles.iframe}
+                                        src={`https://open.spotify.com/embed/track/${track.id}`}
+                                        allowtransparency="true"
+                                        allow="encrypted-media"
+                                    />
+                                </div>
+                                <div className={styles.addSong}>
+                                    <p>Add <i>{track.name}</i> to playlist?</p>
+                                    <button className={buttons.button2} onClick={() => handleAddSong(track)}>Add</button>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
+        </div >
+    );
 }
 
 export default SearchResults;

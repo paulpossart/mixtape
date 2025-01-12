@@ -7,7 +7,7 @@ const userIdSlice = createSlice({
         setuserId: (state, action) => {
             return action.payload
         },
-        clearUserId: (state, action) => {
+        clearUserId: () => {
            return '';
         }
     }

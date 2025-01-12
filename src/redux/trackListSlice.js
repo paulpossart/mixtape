@@ -7,7 +7,7 @@ export const trackListSlice = createSlice({
         setTrackList: (state, actions) => {
             return actions.payload;
         },
-        clearTrackList: (state, actions) => {
+        clearTrackList: () => {
             return [];
         }
     }

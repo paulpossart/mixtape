@@ -5,6 +5,8 @@ import tokenExpirationTimeSliceReducer from './tokenExpirationTimeSlice';
 import userIdSliceReducer from './userIdSlice';
 import searchTypeSliceReducer from './searchTypeSlice';
 import trackListSliceReducer from './trackListSlice';
+import searchSubmittedSliceReducer from './searchSubmittedSlice';
+import playlistSliceReducer from './playlistSlice';
 
 const store = configureStore({
     reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
         authErrorMessage: authErrorSliceReducer,
         searchType: searchTypeSliceReducer,
         trackList: trackListSliceReducer,
+        searchSubmitted: searchSubmittedSliceReducer,
+        playlist: playlistSliceReducer,
     }
 });
 
