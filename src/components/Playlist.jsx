@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromPlaylist, clearPlaylist } from "../redux/playlistSlice";
+import { createPlaylist } from "../api/saveToSpotify";
 import styles from './Playlist.module.scss';
-import buttons from '../styles/buttons.module.scss'
+import buttons from '../styles/buttons.module.scss';
 
 function Playlist({ className }) {
     const [userInput, setUserInput] = useState('');
     const [playlistName, setPlaylistName] = useState('Your Playlist');
+    const [playlistMessage, setPlaylistMessage] = useState(null);
+    const [listId, setListId] = useState(null)
+    const [iframe, setIframe] = useState(null)
 
+    const token = useSelector((state) => state.token);
     const playlist = useSelector((state) => state.playlist);
+    const userId = useSelector((state) => state.userId);
     const dispatch = useDispatch();
 
     const handleRemoveTrack = (track) => {
@@ -31,7 +37,45 @@ function Playlist({ className }) {
         } else {
             setPlaylistName('Your Playlist');
         }
+    }
 
+    const handleSaveToSpotify = async () => {
+        setPlaylistMessage('');
+        if (!userId) {
+            setPlaylistMessage(<p>Please sign in!</p>);
+            return;
+        }
+
+        if (playlist.length === 0) {
+            setPlaylistMessage(<p>Please add some songs!</p>);
+            return;
+        }
+        try {
+            setListId(await createPlaylist(token, userId, playlistName, playlist));
+            setPlaylistMessage(<p>Playlist creation successful!</p>)
+        } catch {
+            setPlaylistMessage(<p>Playlist creation unsuccessful</p>)
+        }
+    }
+    console.log(listId)
+    const handlePlayAll = () => {
+        setPlaylistMessage(<p>This feature is not ready yet!</p>);
+        
+        /*if (!listId) {
+            setPlaylistMessage(<p>Create a playlist first!</p>);
+            return;
+        }
+        setIframe(<iframe
+            title="Spotify Embed: Recommendation Playlist "
+            src={`https://open.spotify.com/embed/playlist/${listId}?utm_source=generator&theme=0`}
+            width="100%"
+            height="100%"
+            style={{ minHeight: '360px' }}
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+        />)*/
+        //button to resetIframe, ie 'go back'
     }
 
     return (
@@ -71,9 +115,11 @@ function Playlist({ className }) {
             </div>
             <div className={styles.btns}>
                 <button className={buttons.button2} onClick={handleRemoveAll}>Remove All</button>
-                <button className={buttons.button1}>Save To Spotify</button>
-                <button className={buttons.button2}>Play All</button>
+                <button className={buttons.button1} onClick={handleSaveToSpotify}>Save To Spotify</button>
+                <button className={buttons.button2} onClick={handlePlayAll}>Play All</button>
             </div>
+            {playlistMessage && playlistMessage}
+            {iframe && iframe}
         </div>
     );
 }

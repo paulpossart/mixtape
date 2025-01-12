@@ -1,5 +1,5 @@
 const clientId = 'e9dcfcba91d74f3aa912153e71f0cd1d';
-const redirectUri = /*'https://my-mixtape.netlify.app/';*/ 'http://localhost:5173/';
+const redirectUri = 'https://my-mixtape.netlify.app/'; //'http://localhost:5173/';
 const stateKey = 'spotify_auth_state';
 
 export async function authorise() {
