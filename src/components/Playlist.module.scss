@@ -1,0 +1,24 @@
+@use '../styles/colors' as c;
+@use '../styles/fonts' as f;
+@forward '../styles/lists.scss';
+
+.renamePlaylist {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0px 10px;
+    width: 100%;
+    margin-top: 0;
+
+    & input {
+        max-width: clamp(120px, 50%, 200px);
+    }
+}
+
+.btns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}

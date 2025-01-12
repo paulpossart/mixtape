@@ -61,7 +61,6 @@ function Searchbar({ className }) {
         }
     }
 
-
     const sessionExpiry = expirationTime
         ? 'Session expires at ' + new Date(parseInt(expirationTime)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
         : 'Loading...';

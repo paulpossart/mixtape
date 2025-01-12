@@ -5,7 +5,6 @@ const playlistSlice = createSlice({
     initialState: [],
     reducers: {
         pushToPlaylist: (state, action) => {
-            console.log('pushing to playlist', action.payload);
             state.push(action.payload);
         },
         removeFromPlaylist: (state, action) => {
