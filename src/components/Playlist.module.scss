@@ -22,3 +22,52 @@
     justify-content: center;
     align-content: center;
 }
+
+.iframeContainer {
+    position: fixed;
+    z-index: 100;
+    opacity: 0.95;
+    height: 80vh;
+    width: 80vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: c.$btnGrey solid 3px;
+    border-radius: 15px;
+    overflow: hidden;
+
+    .iframeCard {
+        position: relative;
+        height: calc(100% - 60px);
+
+        //overflow-y: auto;
+
+        .playlistIframe {
+            height: 100%;
+            width: 100%;
+            min-height: 353px;
+            position: relative;
+        }
+    }
+
+    .iframeFooter {
+        position: relative;
+        height: 60px;
+        width: 100%;
+        background-color: #1f1f1f;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.not500 {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
