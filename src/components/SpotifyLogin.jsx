@@ -15,7 +15,7 @@ function SpotifyLogin() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        
+
         if (!userId) {
             const fetchUserData = async () => {
                 const result = await getTokenAndProfile();
@@ -31,7 +31,6 @@ function SpotifyLogin() {
                     dispatch(clearErrorMessage());
                 }
             };
-
             fetchUserData();
         }
     }, [userId, dispatch])
@@ -61,7 +60,7 @@ function SpotifyLogin() {
                 <button className={buttons.button1} onClick={handleLogout}>Log Out</button>
             )}
 
-            
+
         </div>
     );
 }
