@@ -50,14 +50,12 @@ function Searchbar({ className }) {
             return;
         }
 
-        const { success, error } = await fetchSongs(token, query);
-
-        if (error) {
-            setSearchErrorMessage(<p>{error}</p>);
-        } else if (success) {
-            dispatch(setTrackList(success));
+        try {
+            const returnedTracks = await fetchSongs(token, query);
+            dispatch(setTrackList(returnedTracks));
             dispatch(setSearchSubmitted(true));
-
+        } catch {
+            setSearchErrorMessage(<p>Error fetching songs</p>);
         }
     }
 
@@ -115,7 +113,7 @@ function Searchbar({ className }) {
                 <label htmlFor="radio-album">album</label>
 
                 <br />
-                <button className={buttons.button2} type="submit">Search</button>
+                <button className={buttons.button1} type="submit">Search Spotify</button>
             </form>
             {loginMessage && loginMessage}
             {searchErrorMessage && searchErrorMessage}

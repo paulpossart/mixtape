@@ -22,6 +22,7 @@ function Playlist({ className }) {
     }
 
     const handleRemoveAll = () => {
+        setPlaylistMessage(null);
         dispatch(clearPlaylist());
     }
 
@@ -30,6 +31,7 @@ function Playlist({ className }) {
     }
 
     const handleRename = (e) => {
+        setPlaylistMessage(null);
         e.preventDefault();
         if (userInput.length !== 0) {
             setPlaylistName(userInput);
@@ -40,7 +42,7 @@ function Playlist({ className }) {
     }
 
     const handleSaveToSpotify = async () => {
-        setPlaylistMessage('');
+        setPlaylistMessage(null);
         if (!userId) {
             setPlaylistMessage(<p>Please sign in!</p>);
             return;
@@ -57,7 +59,7 @@ function Playlist({ className }) {
             setPlaylistMessage(<p>Playlist creation unsuccessful</p>)
         }
     }
-    console.log(listId)
+
     const handlePlayAll = () => {
         setPlaylistMessage(<p>This feature is not ready yet!</p>);
         
@@ -113,12 +115,12 @@ function Playlist({ className }) {
                 </div>
 
             </div>
+            {playlistMessage && playlistMessage}
             <div className={styles.btns}>
                 <button className={buttons.button2} onClick={handleRemoveAll}>Remove All</button>
                 <button className={buttons.button1} onClick={handleSaveToSpotify}>Save To Spotify</button>
                 <button className={buttons.button2} onClick={handlePlayAll}>Play All</button>
             </div>
-            {playlistMessage && playlistMessage}
             {iframe && iframe}
         </div>
     );
