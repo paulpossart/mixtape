@@ -101,7 +101,7 @@ function Playlist({ className }) {
                     )}
                 </div>
                 <div className={styles.iframeFooter}>
-                    <button className={buttons.button2} onClick={() => { setIframe(null) }}>Go back</button>
+                    <button className={buttons.button2} onClick={() => { setIframe(null) }}>Close</button>
                 </div>
             </div>
         )

@@ -11,8 +11,8 @@ function SearchResults({ className }) {
     const dispatch = useDispatch();
 
     const handleAddSong = (track) => {
-        if (!playlist.find(item => item.id === track.id ))
-        dispatch(pushToPlaylist(track));
+        if (!playlist.find(item => item.id === track.id))
+            dispatch(pushToPlaylist(track));
     }
 
     return (
@@ -27,8 +27,9 @@ function SearchResults({ className }) {
                                 <div>
                                     <iframe className={styles.iframe}
                                         src={`https://open.spotify.com/embed/track/${track.id}`}
-                                        allowtransparency="true"
-                                        allow="encrypted-media"
+                                        allowfullscreen=""
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"
                                     />
                                 </div>
                                 <div className={styles.addOrRemoveTrack}>
