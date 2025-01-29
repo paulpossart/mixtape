@@ -1,7 +1,9 @@
  # mixtape
  ## About
  This SPA project uses the Spotify Web API to fetch user profile data, search for songs, and save a new playlist to a user's account.  
+ 
  Mixtape is built using React, Redux Toolkit, and SCSS.  
+ 
  Figma prototype: https://www.figma.com/design/8GNRvuZfj11OSnSM9vvWe3/mixtape?node-id=0-1&t=tiu0QqEOSPnuipns-1
  ## Try it out!
  To test search functionality, try searching for 'Foxey Lady'. A *name* search will return the Jimi Hendrix song. An *artist* search will return empty. An *album* search will return various artists.
