@@ -19,7 +19,7 @@ async function namePlaylist(token, userId, playlistName) {
 
     if (!response.ok) {
         const error = await response.json();
-        console.log(`namePlaylist failed: ${error}`);
+        console.log(`namePlaylist failed: ${JSON.stringify(error)}`);
     }
 
     const data = await response.json();
@@ -42,7 +42,7 @@ async function addTracksToPlaylist(token, playlistId, playlist) {
 
     if (!response.ok) {
         const error = await response.json();
-        console.log(`FaddTracksToPlaylist failed: ${error}`);
+        console.log(`AddTracksToPlaylist failed: ${error}`);
     }
 
     return playlistId;
