@@ -59,15 +59,15 @@ function Searchbar({ className }) {
         }
     }
 
-    const sessionExpiry = expirationTime
+    /*const sessionExpiry = expirationTime
         ? 'Session expires at ' + new Date(parseInt(expirationTime)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-        : 'Loading...';
+        : 'Loading...';*/
 
     return (
         <div className={`${className} ${styles.div}`}>
 
             <p>Welcome, <span className={styles.userName}>{userId || 'music lover'}</span>!</p>
-            <p>{errorMessage || sessionExpiry}</p>
+            <p>{/*errorMessage || sessionExpiry*/}</p>
 
             <form onSubmit={handleSubmit}>
                 <input

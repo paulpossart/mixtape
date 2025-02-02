@@ -9,7 +9,7 @@ export async function fetchSongs(token, query) {
 
     if (!response.ok) {
         const error = await response.json();
-        console.log(`Error fetching songs: ${error}`);
+        console.log(`Error fetching songs: `, JSON.stringify(error));
     }
 
     const data = await response.json();
