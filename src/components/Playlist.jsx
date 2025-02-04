@@ -113,7 +113,7 @@ function Playlist({ className }) {
             <>
                 {iframe && iframe}
             </>
-            <div className={`${className} ${styles.div}`}>
+            <div className={`${className} ${styles.main}`}>
                 <h2>{playlistName}</h2>
                 <form className={styles.renamePlaylist} onSubmit={handleRename}>
                     <input

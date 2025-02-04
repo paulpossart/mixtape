@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setToken, clearToken } from "../redux/tokenSlice";
-import { authorise, /**/ getToken, getUser /**/ /*getTokenAndProfile*/ } from "../api/login.js";
+import { setToken, clearToken } from "../../redux/tokenSlice.js";
+import { authorise, /**/ getToken, getUser /**/ /*getTokenAndProfile*/ } from "../../api/login.js";
 
-import { setuserId, clearUserId } from "../redux/userIdSlice";
-import { setErrorMessage, clearErrorMessage } from "../redux/authErrorSlice";
-import { setExpirationTime, clearExpirationTime } from "../redux/tokenExpirationTimeSlice";
+import { setuserId, clearUserId } from "../../redux/userIdSlice.js";
+import { setErrorMessage, clearErrorMessage } from "../../redux/authErrorSlice.js";
+import { setExpirationTime, clearExpirationTime } from "../../redux/tokenExpirationTimeSlice.js";
 
-import buttons from '../styles/buttons.module.scss';
+import buttons from '../../styles/buttons.module.scss';
 
 function SpotifyLogin() {
     const userId = useSelector((state) => state.userId);

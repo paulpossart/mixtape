@@ -16,7 +16,7 @@ function SearchResults({ className }) {
     }
 
     return (
-        <div className={`${className} ${styles.div}`}>
+        <div className={`${className} ${styles.main}`}>
             <h2>Search Results</h2>
             <div className={styles.container}>
                 <div className={styles.results}>
