@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { createPlaylist } from "../../api/saveToSpotify";
+import { getToken } from "../../api/login";
 import buttons from '../../styles/buttons.module.scss';
 
 function SaveToSpotify({ playlistName, setPlaylistMessage, setListId }) {
-    const token = useSelector((state) => state.token);
     const playlist = useSelector((state) => state.playlist);
     const userId = useSelector((state) => state.userId);
-    
+
     const handleSaveToSpotify = async () => {
         setPlaylistMessage(null);
         if (!userId) {
@@ -20,6 +20,7 @@ function SaveToSpotify({ playlistName, setPlaylistMessage, setListId }) {
             return;
         }
         try {
+            const token = await getToken();
             setListId(await createPlaylist(token, userId, playlistName, playlist));
             setPlaylistMessage(<p>Playlist creation successful!</p>)
         } catch {
