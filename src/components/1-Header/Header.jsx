@@ -9,7 +9,7 @@ function Header({ className }) {
             <h1 className={styles.header}>mixtape</h1>
             <div className={styles.btnContainer}>
                 <About />
-                <SpotifyLogin />
+                <SpotifyLogin className={styles.smallscreen} />
             </div>
         </div>
     );

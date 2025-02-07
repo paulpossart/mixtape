@@ -7,7 +7,7 @@ import { setErrorMessage, clearErrorMessage } from "../../redux/authErrorSlice.j
 
 import buttons from '../../styles/buttons.module.scss';
 
-function SpotifyLogin() {
+function SpotifyLogin({className}) {
     const token = useSelector((state) => state.token)
     const dispatch = useDispatch();
     const codeVerifier = localStorage.getItem('code_verifier');
@@ -72,7 +72,7 @@ function SpotifyLogin() {
     return (
         <div>
             {!token ? (
-                <button className={buttons.button1} onClick={handleLogin}>Spotify Login</button>
+                <button className={buttons.button1} onClick={handleLogin}><span className={className}>Spotify</span> Login</button>
             ) : (
                 <button className={buttons.button1} onClick={handleLogout}>Log Out</button>
             )}

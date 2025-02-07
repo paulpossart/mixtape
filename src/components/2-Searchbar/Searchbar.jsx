@@ -1,23 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { fetchSongs } from "../../api/fetchSongs";
 import { useSelector, useDispatch } from "react-redux";
-import { setSearchType } from "../redux/searchTypeSlice";
-import { clearTrackList, setTrackList } from "../redux/trackListSlice";
-import { fetchSongs } from "../api/fetchSongs";
-import { setSearchSubmitted } from "../redux/searchSubmittedSlice";
+import { setSearchType } from "../../redux/searchTypeSlice";
+import { clearTrackList, setTrackList } from "../../redux/trackListSlice";
+import { setSearchSubmitted } from "../../redux/searchSubmittedSlice";
 import styles from './Searchbar.module.scss';
-import buttons from '../styles/buttons.module.scss';
+import buttons from '../../styles/buttons.module.scss';
 
 function Searchbar({ className }) {
     const [userInput, setUserInput] = useState('');
-    const [loginMessage, setLoginMessage] = useState(null);
     const [searchErrorMessage, setSearchErrorMessage] = useState(null);
 
     const searchType = useSelector((state) => state.searchType);
     const userId = useSelector((state) => state.userId);
-    const errorMessage = useSelector((state) => state.authErrorMessage);
-    //const expirationTime = useSelector((state) => state.tokenExpirationTime)
+    const authErrorMessage = useSelector((state) => state.authErrorMessage);
     const token = useSelector((state) => state.token);
-
     const dispatch = useDispatch();
 
     let query;
@@ -37,12 +34,11 @@ function Searchbar({ className }) {
         e.preventDefault();
         setUserInput('');
         setSearchErrorMessage('');
-        setLoginMessage(null);
         dispatch(setSearchSubmitted(false));
         dispatch(clearTrackList());
 
         if (!userId) {
-            setLoginMessage(<p>Please login!</p>);
+            setSearchErrorMessage(<p>Please login!</p>);
             return;
         }
         if (!userInput) {
@@ -59,14 +55,10 @@ function Searchbar({ className }) {
         }
     }
 
-    /*const sessionExpiry = expirationTime
-        ? 'Session expires at ' + new Date(parseInt(expirationTime)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-        : 'Loading...';*/
-
     return (
         <div className={`${className} ${styles.div}`}>
-           
-            <p>{errorMessage}</p>
+
+            <p>{authErrorMessage && authErrorMessage}</p>
             <p>Welcome, <span className={styles.userName}>{userId || 'music lover'}</span>!</p>
 
             <form onSubmit={handleSubmit}>
@@ -115,7 +107,6 @@ function Searchbar({ className }) {
                 <br />
                 <button className={buttons.button1} type="submit">Search Spotify</button>
             </form>
-            {loginMessage && loginMessage}
             {searchErrorMessage && searchErrorMessage}
         </div>
     );
