@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Header from './components/Header';
+import Header from './components/1-Header/Header';
 import Searchbar from './components/Searchbar';
 import SearchResults from './components/SearchResults';
 import Playlist from './components/Playlist';
@@ -13,7 +13,7 @@ const [code, setCode] = useState(false);
   return (
     <div className='App'>
       <Header className='header' code={code} setCode={setCode }/>
-      {<Searchbar className='searchbar' code={code} setCode={setCode }/>}
+      <Searchbar className='searchbar' code={code} setCode={setCode }/>
       <SearchResults className='searchResults' />
       <Playlist className='playlist' />
     </div>

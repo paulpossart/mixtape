@@ -15,7 +15,7 @@ function Searchbar({ className }) {
     const searchType = useSelector((state) => state.searchType);
     const userId = useSelector((state) => state.userId);
     const errorMessage = useSelector((state) => state.authErrorMessage);
-    const expirationTime = useSelector((state) => state.tokenExpirationTime)
+    //const expirationTime = useSelector((state) => state.tokenExpirationTime)
     const token = useSelector((state) => state.token);
 
     const dispatch = useDispatch();
@@ -65,9 +65,9 @@ function Searchbar({ className }) {
 
     return (
         <div className={`${className} ${styles.div}`}>
-
+           
+            <p>{errorMessage}</p>
             <p>Welcome, <span className={styles.userName}>{userId || 'music lover'}</span>!</p>
-            <p>{/*errorMessage || sessionExpiry*/}</p>
 
             <form onSubmit={handleSubmit}>
                 <input

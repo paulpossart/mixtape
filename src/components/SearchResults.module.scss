@@ -1,6 +1,6 @@
 @use '../styles/colors' as c;
 @use '../styles/fonts' as f;
-@forward '../styles/lists.scss';
+@use '../styles/lists';
 
 .noResults {
     display: flex;
