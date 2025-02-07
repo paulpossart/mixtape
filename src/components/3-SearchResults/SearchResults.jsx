@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { pushToPlaylist } from "../redux/playlistSlice";
+import { pushToPlaylist } from "../../redux/playlistSlice";
 import styles from './SearchResults.module.scss';
-import buttons from '../styles/buttons.module.scss';
+import buttons from '../../styles/buttons.module.scss';
 
 function SearchResults({ className }) {
     const trackList = useSelector((state) => state.trackList);
