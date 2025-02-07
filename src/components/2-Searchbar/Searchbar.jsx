@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { fetchSongs } from "../../api/fetchSongs";
+import { getToken } from "../../api/login";
 import { useSelector, useDispatch } from "react-redux";
 import { setSearchType } from "../../redux/searchTypeSlice";
 import { clearTrackList, setTrackList } from "../../redux/trackListSlice";
@@ -14,7 +15,6 @@ function Searchbar({ className }) {
     const searchType = useSelector((state) => state.searchType);
     const userId = useSelector((state) => state.userId);
     const authErrorMessage = useSelector((state) => state.authErrorMessage);
-    const token = useSelector((state) => state.token);
     const dispatch = useDispatch();
 
     let query;
@@ -47,6 +47,7 @@ function Searchbar({ className }) {
         }
 
         try {
+            const token = await getToken();
             const returnedTracks = await fetchSongs(token, query);
             dispatch(setTrackList(returnedTracks));
             dispatch(setSearchSubmitted(true));

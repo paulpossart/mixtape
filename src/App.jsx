@@ -12,8 +12,8 @@ const [code, setCode] = useState(false);
 
   return (
     <div className='App'>
-      <Header className='header' code={code} setCode={setCode }/>
-      <Searchbar className='searchbar' code={code} setCode={setCode }/>
+      <Header className='header' />
+      <Searchbar className='searchbar' />
       <SearchResults className='searchResults' />
       <Playlist className='playlist' />
     </div>

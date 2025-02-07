@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setToken, clearToken } from "../../redux/tokenSlice.js";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { authorise, getToken, getUser } from "../../api/login.js";
 import { setuserId, clearUserId } from "../../redux/userIdSlice.js";
 import { setErrorMessage, clearErrorMessage } from "../../redux/authErrorSlice.js";
 
 import buttons from '../../styles/buttons.module.scss';
 
-function SpotifyLogin({className}) {
-    const token = useSelector((state) => state.token)
+function SpotifyLogin({ className }) {
+    const [token, setToken] = useState(null);
     const dispatch = useDispatch();
     const codeVerifier = localStorage.getItem('code_verifier');
 
@@ -38,7 +37,7 @@ function SpotifyLogin({className}) {
     const authenticate = async () => {
         const tokenData = await getToken();
         if (tokenData) {
-            dispatch(setToken(tokenData))
+           setToken(tokenData)
             const userData = await getUser(tokenData);
             dispatch(setuserId(userData.id));
 
@@ -57,7 +56,7 @@ function SpotifyLogin({className}) {
 
     const handleLogout = () => {
         dispatch(clearUserId());
-        dispatch(clearToken());
+        setToken(null)
         dispatch(clearErrorMessage());
 
         localStorage.removeItem('access_token');

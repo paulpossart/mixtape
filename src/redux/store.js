@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tokenSliceReducer from './tokenSlice';
 import authErrorSliceReducer from './authErrorSlice';
 import userIdSliceReducer from './userIdSlice';
 import searchTypeSliceReducer from './searchTypeSlice';
@@ -9,7 +8,6 @@ import playlistSliceReducer from './playlistSlice';
 
 const store = configureStore({
     reducer: {
-        token: tokenSliceReducer,
         userId: userIdSliceReducer,
         authErrorMessage: authErrorSliceReducer,
         searchType: searchTypeSliceReducer,
