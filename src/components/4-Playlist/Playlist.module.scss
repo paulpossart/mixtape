@@ -1,6 +1,6 @@
-@use '../styles/colors' as c;
-@use '../styles/fonts' as f;
-@use '../styles/lists';
+@use '../../styles/colors' as c;
+@use '../../styles/fonts' as f;
+@use '../../styles/lists';
 
 .renamePlaylist {
     display: flex;
@@ -39,8 +39,6 @@
     .iframeCard {
         position: relative;
         height: calc(100% - 60px);
-
-        //overflow-y: auto;
 
         .playlistIframe {
             height: 100%;

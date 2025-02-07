@@ -27,7 +27,6 @@ function SearchResults({ className }) {
                                 <div>
                                     <iframe className={styles.iframe}
                                         src={`https://open.spotify.com/embed/track/${track.id}`}
-                                        allowfullscreen=""
                                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                                         loading="lazy"
                                     />
