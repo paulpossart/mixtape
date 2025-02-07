@@ -16,6 +16,6 @@
  While users can still listen to songs, the mini-player allows for less control over the functionality and appearance of the app.
  ## Next-steps
  * ~Upgrade authentication to PKCE flow~ Done!
- * Refactor for greater modularity - some of the components got out of control during the later stages of the project!
+ * ~Refactor for greater modularity - some of the components got out of control during the later stages of the project!~ Done!
  * Implement a test suite with Jest
  * Get approved for publication by Spotify for general use
