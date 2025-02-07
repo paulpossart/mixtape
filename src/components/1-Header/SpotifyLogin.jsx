@@ -1,32 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setToken, clearToken } from "../../redux/tokenSlice.js";
-import { authorise, /**/ getToken, getUser /**/ /*getTokenAndProfile*/ } from "../../api/login.js";
-
+import { authorise, getToken, getUser } from "../../api/login.js";
 import { setuserId, clearUserId } from "../../redux/userIdSlice.js";
 import { setErrorMessage, clearErrorMessage } from "../../redux/authErrorSlice.js";
-import { setExpirationTime, clearExpirationTime } from "../../redux/tokenExpirationTimeSlice.js";
 
 import buttons from '../../styles/buttons.module.scss';
 
 function SpotifyLogin() {
-    const userId = useSelector((state) => state.userId);
     const token = useSelector((state) => state.token)
     const dispatch = useDispatch();
     const codeVerifier = localStorage.getItem('code_verifier');
 
     useEffect(() => {
-        if (token) {
-            getProfile(token);
-        } else if (codeVerifier) {
-            authenticate();
+        try {
+            if (token) {
+                getProfile(token);
+            } else if (codeVerifier) {
+                authenticate();
+            }
+        } catch {
+            dispatch(setErrorMessage(`Failed to authorise account`));
         }
-    }, [token, dispatch]);
+    }, [token]);
 
     const getProfile = async (accessToken) => {
-        const userData = await getUser(accessToken);
-        if (userData) {
-            dispatch(setuserId(userData.id));
+        try {
+            const userData = await getUser(accessToken);
+            if (userData) {
+                dispatch(setuserId(userData.id));
+            }
+        } catch {
+            dispatch(setErrorMessage(`Failed to get profile data.`));
         }
     }
 
@@ -46,14 +51,13 @@ function SpotifyLogin() {
         try {
             authorise();
         } catch {
-            console.log('failed to authorise')
+            dispatch(setErrorMessage(`Failed to authorise account`));
         }
     }
 
     const handleLogout = () => {
         dispatch(clearUserId());
         dispatch(clearToken());
-        dispatch(clearExpirationTime());
         dispatch(clearErrorMessage());
 
         localStorage.removeItem('access_token');
@@ -61,7 +65,6 @@ function SpotifyLogin() {
         localStorage.removeItem('spotify_auth_state');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('code_verifier');
-        
 
         window.location = '/';
     }
@@ -80,28 +83,3 @@ function SpotifyLogin() {
 }
 
 export default SpotifyLogin;
-
-
-/*===================================
-     useEffect(() => {
- 
-         if (!userId) {
-             const fetchUserData = async () => {
-                 const result = await getTokenAndProfile();
- 
-                 if (result.error) {
-                     dispatch(setErrorMessage(result.error));
-                     dispatch(clearToken());
-                     dispatch(clearExpirationTime());
-                 } else if (result.userId) {
-                     dispatch(setuserId(result.userId));
-                     dispatch(setToken(result.token));
-                     dispatch(setExpirationTime(result.expirationTime));
-                     dispatch(clearErrorMessage());
-                 }
-             };
-             fetchUserData();
-         }
-     }, [userId, dispatch])
- 
-     ======================================*/
