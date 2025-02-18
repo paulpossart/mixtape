@@ -8,7 +8,6 @@ import './App.scss'
 
 
 function App() {
-const [code, setCode] = useState(false);
 
   return (
     <div className='App'>

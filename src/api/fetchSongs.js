@@ -10,6 +10,7 @@ export async function fetchSongs(token, query) {
     if (!response.ok) {
         const error = await response.json();
         console.log(`Error fetching songs: `, JSON.stringify(error));
+        return;
     }
 
     const data = await response.json();
@@ -21,7 +22,6 @@ export async function fetchSongs(token, query) {
         uri: track.uri,
         image_url:
             track.album.images[1] ? track.album.images[1].url :
-                track.album.images[2] ? track.album.images[2].url :
                     track.album.images[0] ? track.album.images[0].url :
                         '../../src/assets/spotify-color-svgrepo-com.svg',
 
