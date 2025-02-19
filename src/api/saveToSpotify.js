@@ -1,10 +1,14 @@
 export async function createPlaylist(token, userId, playlistName, playlist) {
     const playlistId = await namePlaylist(token, userId, playlistName);
+    if (!playlistId) {
+        console.log('playlistId failed, addTracks will not run');
+        return;
+    }
     const listId = await addTracksToPlaylist(token, playlistId, playlist);
     return listId;
 }
 
-async function namePlaylist(token, userId, playlistName) {
+export async function namePlaylist(token, userId, playlistName) {
 
     const response = await fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
         method: 'POST',
@@ -19,14 +23,14 @@ async function namePlaylist(token, userId, playlistName) {
 
     if (!response.ok) {
         const error = await response.json();
-        console.log(`namePlaylist failed: ${JSON.stringify(error)}`);
+        console.log(`namePlaylist failed: `, JSON.stringify(error));
+        return;
     }
-
     const data = await response.json();
     return data.id;
 }
 
-async function addTracksToPlaylist(token, playlistId, playlist) {
+export async function addTracksToPlaylist(token, playlistId, playlist) {
     const trackUris = playlist.map(track => track.uri);
 
     const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
@@ -42,8 +46,9 @@ async function addTracksToPlaylist(token, playlistId, playlist) {
 
     if (!response.ok) {
         const error = await response.json();
-        console.log(`AddTracksToPlaylist failed: ${error}`);
+        console.log(`addTracksToPlaylist failed: `, JSON.stringify(error));
+        return;
     }
 
     return playlistId;
-}
+};

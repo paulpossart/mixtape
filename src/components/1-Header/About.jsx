@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import buttons from '../../styles/buttons.module.scss'
 import figma from '../../assets/figma-svgrepo-com.svg'
 import github from '../../assets/github-color-svgrepo-com.svg'
