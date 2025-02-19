@@ -18,4 +18,5 @@
  * ~Upgrade authentication to PKCE flow~ Done!
  * ~Refactor for greater modularity - some of the components got out of control during the later stages of the project!~ Done!
  * Implement a test suite with Jest
+   * Added unit and integration tests for key API endpoints: user login, song retrieval, and saving to Spotify
  * Get approved for publication by Spotify for general use
