@@ -1,5 +1,5 @@
 const clientId = 'e9dcfcba91d74f3aa912153e71f0cd1d';
-const redirectUri = 'https://my-mixtape.netlify.app/';
+const redirectUri = 'https://my-mixtape.netlify.app/'; 
 
 export async function authorise() {
     const generateRandomString = (length) => {
