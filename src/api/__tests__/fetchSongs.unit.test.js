@@ -112,7 +112,7 @@ describe('fetchSongs function unit test', () => {
         await fetchSongs('invalid-token', 'song-query');
 
         expect(logSpy).toHaveBeenCalledWith(
-            expect.stringContaining('Error fetching songs'),
+            expect.stringContaining('Error fetching songs:'),
             expect.stringContaining('mock error message')
         );
     });

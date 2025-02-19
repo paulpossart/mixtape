@@ -26,7 +26,7 @@ export async function authorise() {
     const hashed = await sha256(codeVerifier);
     const codeChallenge = base64encode(hashed);
 
-   localStorage.setItem('code_verifier', codeVerifier);
+    localStorage.setItem('code_verifier', codeVerifier);
 
     const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
     const authUrl = new URL("https://accounts.spotify.com/authorize");
@@ -66,19 +66,21 @@ export async function getToken() {
             }),
         }
         const response = await fetch(url, payload);
-        
 
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('access_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refresh_token);
-            const expiryTime = new Date().getTime() + data.expires_in * 1000;
-            localStorage.setItem('expiry_time', expiryTime);
-            console.log(`used refresh token`);
-            return data.access_token;
-        } else {
-            console.log(`getToken failed to refresh`);
+        if (!response.ok) {
+            const error = await response.json();
+            console.log(`getToken failed to refresh: `, JSON.stringify(error));
+            return;
         }
+
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        const expiryTime = new Date().getTime() + data.expires_in * 1000;
+        localStorage.setItem('expiry_time', expiryTime);
+        console.log(`used refresh token`);
+        return data.access_token;
+
     } else {
         const urlParams = new URLSearchParams(window.location.search);
         let code = urlParams.get('code');
@@ -100,18 +102,20 @@ export async function getToken() {
         };
 
         const response = await fetch(url, payload);
-        
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('access_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refresh_token);
-            const expiryTime = new Date().getTime() + data.expires_in * 1000;
-            localStorage.setItem('expiry_time', expiryTime);
-            console.log(`generated new access token`);
-            return data.access_token;
-        } else {
-            console.log(`getToken failed to generate new token`);
+
+        if (!response.ok) {
+            const error = await response.json();
+            console.log(`getToken failed to generate new token: `, JSON.stringify(error));
+            return;
         }
+
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        const expiryTime = new Date().getTime() + data.expires_in * 1000;
+        localStorage.setItem('expiry_time', expiryTime);
+        console.log(`generated new access token`);
+        return data.access_token;
     }
 };
 
@@ -122,10 +126,12 @@ export async function getUser(accessToken) {
         }
     });
 
-    if (response.ok) {
-        const data = await response.json();
+    if (!response.ok) {
+        const error = await response.json();
+        console.log(`getUser failed: `, JSON.stringify(error));
+        return
+    } 
+
+    const data = await response.json();
         return data;
-    } else {
-        console.log(`getUser failed`);
-    }
 };

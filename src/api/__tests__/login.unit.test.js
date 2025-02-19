@@ -104,13 +104,19 @@ describe('getToken function unit test', () => {
 
         fetch.mockResolvedValueOnce({
             ok: false,
+            json: jest.fn().mockResolvedValueOnce({
+                error: { message: 'mock error message' }
+            })
         });
 
         const logSpy = jest.spyOn(console, 'log').mockImplementation();
 
         await getToken();
 
-        expect(logSpy).toHaveBeenCalledWith('getToken failed to refresh');
+        expect(logSpy).toHaveBeenCalledWith(
+            expect.stringContaining('getToken failed to refresh:'),
+            expect.stringContaining('mock error message')
+        );
     });
 
     test('getToken generates new access token', async () => {
@@ -129,13 +135,19 @@ describe('getToken function unit test', () => {
     test('getToken fails to generate new acces token', async () => {
         fetch.mockResolvedValueOnce({
             ok: false,
+            json: jest.fn().mockResolvedValueOnce({
+                error: { message: 'mock error message' }
+            })
         });
 
         const logSpy = jest.spyOn(console, 'log').mockImplementation();
 
         await getToken();
 
-        expect(logSpy).toHaveBeenCalledWith('getToken failed to generate new token');
+        expect(logSpy).toHaveBeenCalledWith(
+            expect.stringContaining('getToken failed to generate new token:'),
+            expect.stringContaining('mock error message')
+        );
     });
 });
 
@@ -168,12 +180,18 @@ describe('getUser function unit test', () => {
     test('getUser fails and logs an error', async () => {
         global.fetch.mockResolvedValue({
             ok: false,
+            json: jest.fn().mockResolvedValueOnce({
+                error: { message: 'mock error message' }
+            })
         });
         const logSpy = jest.spyOn(console, 'log').mockImplementation();
 
         await getUser('invalid-token');
 
-        expect(logSpy).toHaveBeenCalledWith('getUser failed');
+        expect(logSpy).toHaveBeenCalledWith(
+            expect.stringContaining('getUser failed:'),
+            expect.stringContaining('mock error message')
+        );
     });
 });
 
