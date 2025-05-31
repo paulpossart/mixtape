@@ -17,8 +17,3 @@
  ## Issues
  The app originally used Spotify API's preview_url property to allow users to play a preview of a song. 
  That property is now deprecated so, as a work around, I added an embedded Spotify mini-player to allow users to play tracks. 
- ## Next-steps
- * ~Upgrade authentication to PKCE flow~ // Complete
- * ~Refactor for greater modularity - some of the components got out of control during the later stages of the project!~ // Complete
- * Implement a test suite with Jest // In progress...
-   * Added unit and integration tests for key API endpoints: user login, song retrieval, and saving to Spotify
