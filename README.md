@@ -11,9 +11,12 @@
  
  It is built using React, Redux Toolkit, and SCSS.  
  
- [Figma](https://www.figma.com/design/8GNRvuZfj11OSnSM9vvWe3/mixtape?node-id=0-1&t=tiu0QqEOSPnuipns-1)
  ## Try it out
  To test search functionality, try searching for 'Foxey Lady'. A *name* search will return the Jimi Hendrix song. An *artist* search will return empty. An *album* search will return various artists.
  ## Issues
  The app originally used Spotify API's preview_url property to allow users to play a preview of a song. 
- That property is now deprecated so, as a work around, I added an embedded Spotify mini-player to allow users to play tracks. 
+ That property is now deprecated so, as a work around, I added an embedded Spotify mini-player to allow users to play tracks.
+
+ [Visit Site](https://my-mixtape.netlify.app/)
+ 
+ [Figma](https://www.figma.com/design/8GNRvuZfj11OSnSM9vvWe3/mixtape?node-id=0-1&t=tiu0QqEOSPnuipns-1)
